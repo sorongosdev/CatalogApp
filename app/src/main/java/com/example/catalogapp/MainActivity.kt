@@ -1,6 +1,7 @@
 package com.example.catalogapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,37 +30,25 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CatalogAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                Greeting(onButtonClicked = {
+                    Toast.makeText(this,"Send Clicked", Toast.LENGTH_SHORT).show()
+                })
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        modifier = Modifier.size(300.dp),
-        color = Color.Red,
-        text = "Hello $name!\nHello $name!\nHello $name!\n",
-        fontSize = 30.sp,
-        fontWeight = FontWeight.Bold,
-        fontFamily = FontFamily.Cursive,
-        letterSpacing = 2.sp,
-        maxLines = 2,
-        textDecoration = TextDecoration.Underline,
-        textAlign = TextAlign.Justify
-    )
+fun Greeting(onButtonClicked: () -> Unit) {
+    Button(onClick = onButtonClicked){
+        Text(text = "Add")
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     CatalogAppTheme {
-        Greeting("Android")
+        Greeting(onButtonClicked={})
     }
 }
