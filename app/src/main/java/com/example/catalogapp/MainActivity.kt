@@ -5,23 +5,18 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Send
+
 import androidx.compose.material3.Button
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.catalogapp.ui.theme.CatalogAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -41,7 +36,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(onButtonClicked: () -> Unit) {
     Button(onClick = onButtonClicked){
-        Text(text = "Add")
+        Icon(
+            imageVector = Icons.AutoMirrored.Filled.Send,
+            contentDescription = null
+        )
+        Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+        Text(text = "Send")
     }
 }
 
