@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.offset
@@ -51,14 +52,15 @@ fun Greeting() {
     ) {
         Icon(
             imageVector = Icons.Filled.Search,
-            contentDescription = null
+            contentDescription = null,
+            modifier = Modifier.background(Color.Blue)
         )
         Spacer(
-            modifier = Modifier.size(ButtonDefaults.IconSpacing)
+            modifier = Modifier.size(ButtonDefaults.IconSpacing).background(Color.Blue)
         )
         Text(
             text = "Search",
-            modifier = Modifier.offset(x = 10.dp)
+            modifier = Modifier.offset(x = 10.dp).background(Color.Blue)
         )
     }
 }
