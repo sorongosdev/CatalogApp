@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -56,7 +57,11 @@ fun Greeting() {
         Spacer(
             modifier = Modifier.size(ButtonDefaults.IconSpacing)
         )
-        Text(text = "Search")
+        Text(text = "Search",
+            modifier = Modifier.clickable {
+
+            }
+        )
     }
 }
 
