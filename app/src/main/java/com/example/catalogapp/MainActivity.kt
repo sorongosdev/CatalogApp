@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -45,7 +46,8 @@ fun Greeting(onButtonClicked: () -> Unit) {
         onClick = onButtonClicked,
         enabled = true,
         border = BorderStroke(10.dp, Color.Magenta),
-        shape = RoundedCornerShape(10.dp)
+        shape = RoundedCornerShape(10.dp),
+        contentPadding = PaddingValues(20.dp)
     ){
         Icon(
             imageVector = Icons.AutoMirrored.Filled.Send,
