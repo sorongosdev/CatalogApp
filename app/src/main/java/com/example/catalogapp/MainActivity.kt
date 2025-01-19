@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -38,12 +39,15 @@ fun Greeting() {
     Button(
         onClick = {},
         modifier = Modifier
-            .size(200.dp),
+            .size(200.dp)
+            .padding(10.dp)
+        ,
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Black,
             contentColor = Color.Cyan
         ),
-        shape = RectangleShape
+        shape = RectangleShape,
+        enabled = false
     ) {
         Icon(
             imageVector = Icons.Filled.Search,
