@@ -38,8 +38,7 @@ fun Greeting() {
     Button(
         onClick = {},
         modifier = Modifier
-            .height(100.dp)
-            .width(200.dp)
+            .size(200.dp,100.dp)
     ) {
         Icon(
             imageVector = Icons.Filled.Search,
