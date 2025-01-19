@@ -35,7 +35,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(onButtonClicked: () -> Unit) {
-    Button(onClick = onButtonClicked){
+    Button(
+        onClick = onButtonClicked,
+        enabled = false
+    ){
         Icon(
             imageVector = Icons.AutoMirrored.Filled.Send,
             contentDescription = null
