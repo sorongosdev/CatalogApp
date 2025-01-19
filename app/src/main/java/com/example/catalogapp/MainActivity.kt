@@ -1,6 +1,7 @@
 package com.example.catalogapp
 
 import android.os.Bundle
+import android.view.RoundedCorner
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,6 +9,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
 
@@ -41,7 +44,8 @@ fun Greeting(onButtonClicked: () -> Unit) {
     Button(
         onClick = onButtonClicked,
         enabled = true,
-        border = BorderStroke(10.dp, Color.Magenta)
+        border = BorderStroke(10.dp, Color.Magenta),
+        shape = RoundedCornerShape(10.dp)
     ){
         Icon(
             imageVector = Icons.AutoMirrored.Filled.Send,
