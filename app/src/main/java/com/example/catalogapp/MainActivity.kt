@@ -32,14 +32,14 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String) {
     Surface(
-        color = MaterialTheme.colorScheme.surface,
+        color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.padding(5.dp),
         shadowElevation = 10.dp,
         border = BorderStroke(
             width = 2.dp,
             color = Color.Magenta
         ),
-        shape = CircleShape
+        shape = CircleShape,
     ) {
         Text(
             text = "Hello $name",
