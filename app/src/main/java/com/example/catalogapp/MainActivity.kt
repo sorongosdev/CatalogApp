@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -37,7 +38,8 @@ fun Greeting(name: String) {
         border = BorderStroke(
             width = 2.dp,
             color = Color.Magenta
-        )
+        ),
+        shape = CircleShape
     ) {
         Text(
             text = "Hello $name",
