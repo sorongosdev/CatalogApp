@@ -37,10 +37,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun BoxTheme() {
-    Row(modifier = Modifier.height(40.dp)) {
-        Text(text = "첫번째!",modifier = Modifier.align(Alignment.Top))
-        Text(text = "두번째!",modifier = Modifier.align(Alignment.CenterVertically))
-        Text(text = "세번째!",modifier = Modifier.align(Alignment.Bottom))
+    Row(verticalAlignment = Alignment.Bottom,modifier = Modifier.height(40.dp)) {
+        Text(text = "첫번째!")
+        Text(text = "두번째!")
+        Text(text = "세번째!")
     }
 }
 
