@@ -14,6 +14,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -46,9 +50,20 @@ fun BoxTheme() {
             .height(40.dp)
             .width(200.dp)
     ) {
-        Text(text = "첫번째!")
-        Text(text = "두번째!")
-        Text(text = "세번째!")
+        Text(
+            text = "첫번째!",
+            modifier = Modifier.weight(2f)
+        )
+        Icon(
+            imageVector = Icons.Filled.AccountBox,
+            contentDescription = "Add",
+            modifier = Modifier.weight(1f)
+                .background(Color.Cyan)
+        )
+        Text(
+            text = "세번째!",
+            modifier = Modifier.weight(3f)
+        )
     }
 }
 
