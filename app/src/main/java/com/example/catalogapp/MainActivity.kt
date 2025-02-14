@@ -7,6 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -35,17 +37,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun BoxTheme() {
-    Box {
-        Box(modifier = Modifier
-            .matchParentSize()
-            .background(Color.Cyan)
-            .align(Alignment.CenterStart)
-        )
-        Box(modifier = Modifier
-            .size(70.dp)
-            .background(Color.Yellow)
-            .align(Alignment.Center)
-        )
+    Row(modifier = Modifier.height(40.dp)) {
+        Text(text = "첫번째!",modifier = Modifier.align(Alignment.Top))
+        Text(text = "두번째!",modifier = Modifier.align(Alignment.CenterVertically))
+        Text(text = "세번째!",modifier = Modifier.align(Alignment.Bottom))
     }
 }
 
