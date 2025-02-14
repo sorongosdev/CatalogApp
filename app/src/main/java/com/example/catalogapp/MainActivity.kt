@@ -4,27 +4,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.catalogapp.ui.theme.CatalogAppTheme
@@ -35,37 +23,37 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CatalogAppTheme {
-                BoxTheme()
+                Outer()
             }
         }
     }
 }
 
 @Composable
-fun BoxTheme() {
-    Row(
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.Bottom,
-        modifier = Modifier
-            .height(40.dp)
-            .width(200.dp)
+fun Outer() {
+    Column(
+        Modifier.height(200.dp)  // Column 자체의 높이를 지정
     ) {
-        Text(
-            text = "첫번째!",
-            modifier = Modifier.weight(2f)
-        )
-        Icon(
-            imageVector = Icons.Filled.AccountBox,
-            contentDescription = "Add",
-            modifier = Modifier.weight(1f)
-                .background(Color.Cyan)
-        )
-        Text(
-            text = "세번째!",
-            modifier = Modifier.weight(3f)
+        Inner(modifier = Modifier
+            .widthIn(200.dp)
+            .heightIn(160.dp)
         )
     }
 }
+
+@Composable
+fun Inner(modifier: Modifier = Modifier) {
+    BoxWithConstraints(modifier) {
+        if (maxHeight > 150.dp) {
+            Text(
+                text = "여기 꽤 길군요...",
+                modifier = Modifier.align(Alignment.BottomCenter)
+            )
+        }
+        Text("maxW: $maxWidth maxH: $maxHeight minW: $minWidth minH: $minHeight")
+    }
+}
+
 
 @Preview(
     showBackground = true,
@@ -73,6 +61,6 @@ fun BoxTheme() {
 @Composable
 fun GreetingPreview() {
     CatalogAppTheme {
-        BoxTheme()
+        Outer()
     }
 }
