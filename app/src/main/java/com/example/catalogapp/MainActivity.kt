@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,12 +27,17 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
-    AsyncImage(
-        model = "https://picsum.photos/200/300",
-        contentDescription = "랜덤 이미지"
-    )
+    Column {
+        AsyncImage(
+            model = "https://picsum.photos/200/300",
+            contentDescription = "랜덤 이미지"
+        )
+        AsyncImage(
+            model = "https://picsum.photos/200/300",
+            contentDescription = "랜덤 이미지"
+        )
+    }
 }
-
 
 @Preview(
     showBackground = true,
