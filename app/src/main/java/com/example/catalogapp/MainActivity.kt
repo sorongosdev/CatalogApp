@@ -4,14 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.painterResource
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.tooling.preview.Preview
+import coil3.ImageLoader
+import coil3.compose.AsyncImage
 import com.example.catalogapp.ui.theme.CatalogAppTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,19 +26,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
-    Column {
-        Image(
-            painter = painterResource(id = R.drawable.wall),
-            contentDescription = "엔텔로프 캐년"
-        )
-
-        Image(
-            imageVector = Icons.Filled.Settings,
-            contentDescription = "Setting"
-        )
-    }
+    AsyncImage(
+        model = "https://picsum.photos/200/300",
+        contentDescription = "랜덤 이미지"
+    )
 }
-
 
 
 @Preview(
