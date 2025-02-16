@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,6 +31,11 @@ fun Greeting() {
         Image(
             painter = painterResource(id = R.drawable.wall),
             contentDescription = "엔텔로프 캐년"
+        )
+
+        Image(
+            imageVector = Icons.Filled.Settings,
+            contentDescription = "Setting"
         )
     }
 }
