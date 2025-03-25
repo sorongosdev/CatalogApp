@@ -15,9 +15,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,63 +40,24 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CatalogAppTheme {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    CardEx(cardData)
-                    CardEx(cardData)
-                }
+                CheckBoxEx()
             }
         }
     }
 
-    companion object {
-        val cardData = CardData(
-            imageUri = "https://picsum.photos/200/300",
-            imageDescription = "Random Image",
-            author = "Sora",
-            description = "Free Developer",
-
-            )
-    }
 }
 
 @Composable
-fun CardEx(cardData: CardData) {
-    val placeHolderColor = Color(0xFF000000)
-
-    Card(
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(4.dp),
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(8.dp)
-        ) {
-            AsyncImage(
-                model = cardData.imageUri,
-                contentScale = ContentScale.Crop,
-                contentDescription = cardData.imageDescription,
-                modifier = Modifier.size(32.dp)
-                    .clip(CircleShape),
-                placeholder = ColorPainter(placeHolderColor),
-                error = ColorPainter(placeHolderColor),
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-
-            Column {
-                Text(
-                    text = cardData.author,
-                )
-                Spacer(modifier = Modifier.size(4.dp))
-                Text(
-                    text = cardData.description,
-                )
+fun CheckBoxEx() {
+    Row(verticalAlignment = Alignment.CenterVertically){
+        var checked = remember {mutableStateOf(false)}
+        Checkbox(
+            checked = checked.value,
+            onCheckedChange = {
+                checked.value = !checked.value
             }
-        }
+        )
+        Text(text = "Are you ready?")
     }
 }
 
@@ -103,13 +67,6 @@ fun CardEx(cardData: CardData) {
 @Composable
 fun GreetingPreview() {
     CatalogAppTheme {
-        CardEx(MainActivity.cardData)
+        CheckBoxEx()
     }
 }
-
-data class CardData(
-    val imageUri: String,
-    val imageDescription: String,
-    val author: String,
-    val description: String,
-)
