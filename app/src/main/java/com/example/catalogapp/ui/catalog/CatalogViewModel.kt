@@ -47,10 +47,54 @@ class CatalogViewModel @Inject constructor(
 
             repository.getAllCatalog().fold(
                 onSuccess = { dtoList ->
-                    // DTO -> Domain 모델로 변환하면서 이미지 리소스 ID도 설정
-                    val domainList = dtoList.toDomainModel(context)
-                    _cafeList.value = domainList
+                    // DTO -> Domain 모델로 변환
+                    val initialDomainList = dtoList.toDomainModel(context)
+
+                    // 임시 리스트에 먼저 데이터를 저장하고 UI에 표시 (이미지 없이)
+                    _cafeList.value = initialDomainList
                     _uiState.value = UiState.Success
+
+                    // 각 항목에 대해 이미지 로드 시도
+                    val updatedCafeList = mutableListOf<Cafe>()
+
+                    initialDomainList.forEach { cafe ->
+                        viewModelScope.launch {
+                            try {
+                                // 이미지 바이트 배열 가져오기 시도
+                                repository.getImageBytes(cafe.imageUrl).fold(
+                                    onSuccess = { imageBytes ->
+                                        // 이미지 바이트가 로드되면 해당 항목 업데이트
+                                        val updatedCafe = cafe.copy(imageBytes = imageBytes)
+
+                                        // 리스트에 업데이트된 항목 추가
+                                        updatedCafeList.add(updatedCafe)
+
+                                        // 모든 항목이 처리되면 전체 리스트 업데이트
+                                        if (updatedCafeList.size == initialDomainList.size) {
+                                            _cafeList.value = updatedCafeList
+                                        }
+                                    },
+                                    onFailure = { error ->
+                                        // 이미지 로드 실패 시 원래 항목 유지
+                                        updatedCafeList.add(cafe)
+
+                                        // 모든 항목이 처리되면 전체 리스트 업데이트
+                                        if (updatedCafeList.size == initialDomainList.size) {
+                                            _cafeList.value = updatedCafeList
+                                        }
+                                    }
+                                )
+                            } catch (e: Exception) {
+                                // 예외 발생 시 원래 항목 유지
+                                updatedCafeList.add(cafe)
+
+                                // 모든 항목이 처리되면 전체 리스트 업데이트
+                                if (updatedCafeList.size == initialDomainList.size) {
+                                    _cafeList.value = updatedCafeList
+                                }
+                            }
+                        }
+                    }
                 },
                 onFailure = { error ->
                     _uiState.value = UiState.Error(error.message ?: "카페 목록을 불러오는데 실패했습니다")
