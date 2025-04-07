@@ -17,23 +17,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.example.catalogapp.R
 import com.example.catalogapp.domain.model.Cafe
 
 @Composable
-fun CafeItem(itemData: Cafe) {
+fun CafeItem(cafe: Cafe) {
     val context = LocalContext.current
-
-    // 이미지 URL에서 리소스 이름 추출 (예: "/catalog/img/lion_home" -> "lion_home")
-    val imageName = itemData.imageUrl.substringAfterLast("/")
-
-    // 리소스 ID 가져오기
-    val resourceId = context.resources.getIdentifier(
-        imageName, "drawable", context.packageName
-    )
-
-    // 리소스가 없는 경우 기본 이미지 사용
-    val finalResourceId = if (resourceId != 0) resourceId else R.drawable.ic_launcher_background
 
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
@@ -44,13 +36,18 @@ fun CafeItem(itemData: Cafe) {
         Column(
             modifier = Modifier.padding(8.dp)
         ) {
-            Image(
-                painter = painterResource(id = finalResourceId),
-                contentDescription = itemData.title,
+            AsyncImage(
+                model = ImageRequest.Builder(context)
+                    .data(cafe.imageUrl)
+                    .crossfade(true)
+                    .build(),
+                contentDescription = cafe.title,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(180.dp),
-                contentScale = ContentScale.Crop
+                    .height(200.dp),
+                contentScale = ContentScale.Crop,
+                error = painterResource(id = R.drawable.ic_launcher_background),
+                placeholder = painterResource(id = R.drawable.ic_launcher_background)
             )
 
             Spacer(
@@ -58,14 +55,14 @@ fun CafeItem(itemData: Cafe) {
             )
 
             Text(
-                text = itemData.title,
+                text = cafe.title,
                 style = MaterialTheme.typography.titleLarge,
             )
 
             Spacer(modifier = Modifier.size(8.dp))
 
             Text(
-                text = itemData.description
+                text = cafe.description
             )
         }
     }
