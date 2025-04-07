@@ -6,9 +6,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
+import java.net.URL
+import java.net.HttpURLConnection
 
 interface MainRepository {
     suspend fun getAllCatalog(): Result<List<CafeItemDto>>
+    suspend fun getImageBytes(imageUrl: String): Result<ByteArray>
 }
 
 @Singleton
@@ -31,4 +34,21 @@ class MainRepositoryImpl @Inject constructor(
         }
     }
 
+    // 이미지를 바이트 배열로 가져오는 구현 추가
+    override suspend fun getImageBytes(imageUrl: String): Result<ByteArray> = withContext(Dispatchers.IO) {
+        try {
+            val url = URL(imageUrl)
+            val connection = url.openConnection() as HttpURLConnection
+            connection.doInput = true
+            connection.connect()
+
+            val inputStream = connection.inputStream
+            val bytes = inputStream.readBytes()
+            inputStream.close()
+
+            Result.success(bytes)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }
